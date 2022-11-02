@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Feed from "./components/layout/Feed.jsx";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { SidebarLeft } from "./components/index.js";
+import { Stack } from "@mui/material";
 
-function App() {
+// https://reactrouter.com/en/v6.3.0/getting-started/overview
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Stack direction="row">
+        <SidebarLeft />
+        <Routes>
+          <Route path="/" element={<Feed />} />
+        </Routes>
+      </Stack>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;

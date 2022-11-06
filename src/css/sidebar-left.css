@@ -1,0 +1,23 @@
+/* .sidebar-left{
+    margin-left: 2%;
+} */
+
+/* Font Dynamic 1em === 16px === 100% --> Can be affected by other sizing*/
+/* Rem ---> Wont be affected by parent setttings */
+.sidebar-left {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.sidebar-left button {
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-transform: none;
+}
+
+/* https://www.educative.io/answers/how-to-center-an-absolutely-positioned-element-inside-its-parent */
+.tweet-btn span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+}

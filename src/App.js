@@ -9,7 +9,11 @@ import { Stack } from "@mui/material";
 const App = () => {
   return (
     <BrowserRouter>
-      <Stack direction="row">
+      <Stack direction="row"
+       sx={{
+        marginLeft: '5%'
+      }}
+      >
         <SidebarLeft />
         <Routes>
           <Route path="/" element={<Feed />} />

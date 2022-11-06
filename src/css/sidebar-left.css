@@ -8,12 +8,16 @@
   overflow-y: auto;
   overflow-x: hidden;
 }
+
 .sidebar-left button {
   justify-content: flex-start;
   align-items: flex-start;
   text-transform: none;
 }
 
+.side-btn {
+  height: 50px;
+}
 /* https://www.educative.io/answers/how-to-center-an-absolutely-positioned-element-inside-its-parent */
 .tweet-btn span {
   position: absolute;

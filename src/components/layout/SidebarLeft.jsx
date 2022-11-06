@@ -5,22 +5,28 @@ import "../../css/sidebar-left.css";
 
 const SidebarLeft = () => {
   return (
-    // <Box flexGrow={0.2}>
+    <Box flexGrow={1}>
       <Stack
         className="sidebar-left"
         sx={{
           display: "grid",
           rowGap: 2,
-          // position: "fixed",
-          height: '100vh'
+          height: "100vh",
+          paddingRight: "12px",
+          justifyContent: "flex-end",
         }}
       >
         <Button variant="text">🕊️</Button>
 
         {icons.map((item, index) => {
           return (
-            <Button   sx={{ color: "white", bgcolor: 'red' }} variant="text">
-              <span key={index}>{item.icon}</span>
+            <Button
+              key={index}
+              className="side-btn"
+              sx={{ color: "white" }}
+              variant="text"
+            >
+              <span>{item.icon}</span>
               <span>{item.name}</span>
             </Button>
           );
@@ -30,7 +36,7 @@ const SidebarLeft = () => {
           <span>Tweet</span>
         </Button>
       </Stack>
-    // </Box>
+    </Box>
   );
 };
 

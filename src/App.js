@@ -11,7 +11,7 @@ const App = () => {
     <BrowserRouter>
       <Stack direction="row"
        sx={{
-        marginLeft: '5%'
+        width: '100%'
       }}
       >
         <SidebarLeft />

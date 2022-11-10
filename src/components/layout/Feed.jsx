@@ -1,22 +1,14 @@
-import React from "react";
-import { Stack, Box } from "@mui/material";
-import { CenterPage, SidebarRight } from "../index";
+import React from 'react'
+import { Box } from '@mui/material'
 
 const Feed = () => {
   return (
     <Box
-      flexGrow={2}
-      sx={{ width: "60%", overflowY: "auto", maxHeight: "100vh" }}
+    sx={{ color: 'white' }}
     >
-      <Stack
-        // className="right-side"
-        sx={{ bgcolor: "black", display: "flex", flexDirection: "row" }}
-      >
-        <CenterPage />
-        <SidebarRight />
-      </Stack>
+      Feed
     </Box>
-  );
-};
+  )
+}
 
-export default Feed;
+export default Feed

@@ -18,4 +18,4 @@ export const icons = [
 
 // export { default as Homeicon } from '@mui/icons-material/HomeOutlined'
 // export { default as CenterPage } from '../components/layout/CenterPage.jsx'
-// export { default as SidebarRight } from '../components/layout/SidebarRight.jsx'
+// export { default as Feed } from '../components/layout/Feed.jsx'

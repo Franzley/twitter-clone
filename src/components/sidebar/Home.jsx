@@ -7,6 +7,8 @@ import TweetButton from "../utilities/TweetButton.jsx";
 import { Link } from "react-router-dom";
 
 const Home = () => {
+  const arr = []
+  for (let i=0; i<50; i++) arr.push(i)
   const homeCenterPage = {
     pageHeader: (
       <Box sx={{ borderBottom: 1, padding: "12px" }}>
@@ -23,7 +25,8 @@ const Home = () => {
     tweets: (
       <ul className="tweets">
         <Link style={{ textDecoration: "none" }} to="/status/1">
-          <li>
+          {arr.map((item, index)=>{
+            return <li key={index}>
             <Box
               sx={{
                 padding: "12px",
@@ -32,6 +35,7 @@ const Home = () => {
               Example
             </Box>
           </li>
+          })}
         </Link>
       </ul>
     ),

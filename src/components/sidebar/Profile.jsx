@@ -4,11 +4,7 @@ import { CenterPage, Feed } from "../index";
 
 const Profile = () => {
   const profileCenterPage = {
-    pageHeader: (
-      <Stack>
-        Who to follow
-      </Stack>
-    ),
+    pageHeader: <Stack>Who to follow</Stack>,
   };
 
   return (

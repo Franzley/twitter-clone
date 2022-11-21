@@ -9,7 +9,7 @@ import {
   Messages,
   Notifications,
   Profile,
-  Tweets
+  Tweets,
 } from "./components/index.js";
 
 import { Stack, Box } from "@mui/material";

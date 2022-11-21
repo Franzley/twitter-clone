@@ -16,6 +16,8 @@ const Sidebar = () => {
           height: "100vh",
           paddingRight: "20px",
           justifyContent: "flex-end",
+          borderRight: 1,
+          borderColor: "#464646",
         }}
       >
         <Link style={{ textDecoration: "none" }} to="/home">

@@ -7,11 +7,11 @@ import TweetButton from "../utilities/TweetButton.jsx";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  const arr = []
-  for (let i=0; i<50; i++) arr.push(i)
+  const arr = [];
+  for (let i = 0; i < 1; i++) arr.push(i);
   const homeCenterPage = {
     pageHeader: (
-      <Box sx={{ borderBottom: 1, padding: "12px" }}>
+      <Box sx={{ borderBottom: 1, padding: "12px", paddingTop: 0 }}>
         <Stack sx={{ justifyContent: "space-between", flexDirection: "row" }}>
           <Typography>Latest Tweets</Typography>
           <Star />
@@ -24,25 +24,49 @@ const Home = () => {
     ),
     tweets: (
       <ul className="tweets">
-        <Link style={{ textDecoration: "none" }} to="/status/1">
-          {arr.map((item, index)=>{
-            return <li key={index}>
-            <Box
-              sx={{
-                padding: "12px",
-              }}
+        {arr.map((item, index) => {
+          return (
+            <Link
+              key={index}
+              style={{ textDecoration: "none" }}
+              to={`/status/${index}`}
             >
-              Example
-            </Box>
-          </li>
-          })}
-        </Link>
+              <li>
+                <Stack
+                  sx={{
+                    padding: "12px",
+                    flexDirection: "row",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      marginRight: "12px",
+                    }}
+                  >
+                    Picture
+                  </Box>
+                  <Stack
+                    sx={{
+                      flexDirection: "column",
+                    }}
+                  >
+                    <Box>{`User ${index}`}</Box>
+                    <Stack>
+                      <Box>Content</Box>
+                      <Box>Icons</Box>
+                    </Stack>
+                  </Stack>
+                </Stack>
+              </li>
+            </Link>
+          );
+        })}
       </ul>
     ),
   };
 
   return (
-    <Stack sx={{ bgcolor: "black", display: "flex", flexDirection: "row" }}>
+    <Stack sx={{ flexDirection: "row" }}>
       <CenterPage content={homeCenterPage} />
       <Feed />
     </Stack>

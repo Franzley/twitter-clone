@@ -4,11 +4,7 @@ import { CenterPage, Feed } from "../index";
 
 const Bookmarks = () => {
   const bookmarksCenterPage = {
-    pageHeader: (
-      <Stack>
-        Save Tweets for later
-      </Stack>
-    ),
+    pageHeader: <Stack>Save Tweets for later</Stack>,
   };
 
   return (

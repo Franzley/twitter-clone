@@ -6,10 +6,9 @@ const CenterPage = ({ content }) => {
     <Box
       sx={{
         color: "white",
-        borderRight: 1,
-        borderLeft: 1,
         width: "600px",
-        height: "100vh",
+        borderRight: 1,
+        borderColor: "#464646",
       }}
     >
       {content.pageHeader}

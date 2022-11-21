@@ -4,11 +4,7 @@ import { CenterPage, Feed } from "../index";
 
 const Lists = () => {
   const listsCenterPage = {
-    pageHeader: (
-      <Stack> 
-        Pinned Lists
-      </Stack>
-    ),
+    pageHeader: <Stack>Pinned Lists</Stack>,
   };
 
   return (

@@ -4,11 +4,7 @@ import { CenterPage, Feed } from "../index";
 
 const Messages = () => {
   const messagesCenterPage = {
-    pageHeader: (
-      <Stack>
-       Welcome to your inbox!
-      </Stack>
-    ),
+    pageHeader: <Stack>Welcome to your inbox!</Stack>,
   };
 
   return (

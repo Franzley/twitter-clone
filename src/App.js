@@ -11,6 +11,7 @@ import {
   Profile,
   Tweets,
 } from "./components/index.js";
+import injectContext from "./store/appContext.js";
 
 import { Stack, Box } from "@mui/material";
 
@@ -47,4 +48,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default injectContext(App);

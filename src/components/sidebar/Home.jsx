@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Stack, Box, Typography } from "@mui/material";
 import { CenterPage, Feed } from "../index";
 import { Star } from "@mui/icons-material";
 import "../../css/home.css";
 import TweetButton from "../utilities/TweetButton.jsx";
 import { Link } from "react-router-dom";
-
+import { Context } from "../../store/appContext";
+ 
 const Home = () => {
+  const { store, actions } = useContext(Context);
+
   const arr = [];
   for (let i = 0; i < 1; i++) arr.push(i);
   const homeCenterPage = {

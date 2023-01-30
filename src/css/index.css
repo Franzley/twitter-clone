@@ -5,7 +5,7 @@ body {
 }
 
 /* https://www.educative.io/answers/how-to-center-an-absolutely-positioned-element-inside-its-parent */
-.tweet-btn span {
+.default-btn span {
   position: absolute;
   top: 50%;
   left: 50%;

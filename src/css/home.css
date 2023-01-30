@@ -11,3 +11,17 @@
 .inputHome::placeholder {
   font-size: 1.3rem;
 }
+
+.login-prompt {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  text-transform: none;
+  font-size: 1.3rem;
+}
+.login-prompt-message {
+  margin-right: 200px;
+}

@@ -12,6 +12,7 @@ import {
   Tweets,
 } from "./components/index.js";
 import injectContext from "./store/appContext.js";
+import LoginPrompt from "./components/layout/LoginPrompt.jsx";
 
 import { Stack, Box } from "@mui/material";
 
@@ -20,6 +21,7 @@ import { Stack, Box } from "@mui/material";
 const App = () => {
   return (
     <BrowserRouter>
+      <LoginPrompt />
       <Stack
         direction="row"
         sx={{

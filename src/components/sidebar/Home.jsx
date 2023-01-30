@@ -11,7 +11,7 @@ const Home = () => {
   const { store, actions } = useContext(Context);
 
   const arr = [];
-  for (let i = 0; i < 1; i++) arr.push(i);
+  for (let i = 0; i < 50; i++) arr.push(i);
   const homeCenterPage = {
     pageHeader: (
       <Box sx={{ borderBottom: 1, padding: "12px", paddingTop: 0 }}>

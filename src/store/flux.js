@@ -10,7 +10,13 @@ import { app } from "../firebase/FirebaseConfig";
 const getState = ({ getStore, getActions, setStore }) => {
   const auth = getAuth(app);
   return {
-    store: {},
+    store: {
+      currentUser: "",
+      modalMessage: {
+        sectionMessage: "Sign in to Chirper",
+        accountStatusBtn: "signIn",
+      },
+    },
     actions: {
       isUserLogged: () => {
         onAuthStateChanged(auth, (user) => {
@@ -22,7 +28,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             const currentUser = {
               email: email,
             };
-            setStore({ currentUser: currentUser });
+            setStore({ currentUser: currentUser.email });
             // ...
           } else {
             // User is signed out
@@ -35,6 +41,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           (userCredential) => {
             const user = userCredential.user;
             console.log(user);
+            window.location.reload(false);
           }
         );
         console.log("succeeded");
@@ -43,11 +50,13 @@ const getState = ({ getStore, getActions, setStore }) => {
         signInWithEmailAndPassword(auth, email, password)
           .then((userCredential) => {
             const user = userCredential.user;
+            window.location.reload(false);
           })
           .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
           });
+        console.log("succeeded");
       },
       signOut: () => {
         signOut(auth)
@@ -55,6 +64,22 @@ const getState = ({ getStore, getActions, setStore }) => {
           .catch((error) => {
             // An error happened.
           });
+      },
+      noUserIsLogged: (accountStatus) => {
+        const logInSection = {
+          sectionMessage: "Sign in to Chirper",
+          accountStatusBtn: "signIn",
+        };
+        const signUpSection = {
+          sectionMessage: "Join Chirper today",
+          accountStatusBtn: "createAccount",
+        };
+
+        if (accountStatus === "login") {
+          setStore({ modalMessage: logInSection });
+        } else if (accountStatus === "signup") {
+          setStore({ modalMessage: signUpSection });
+        }
       },
     },
   };

@@ -15,7 +15,3 @@ export const icons = [
   { icon: <ViewListOutlinedIcon />, name: "Lists" },
   { icon: <PersonOutlineOutlinedIcon />, name: "Profile" },
 ];
-
-// export { default as Homeicon } from '@mui/icons-material/HomeOutlined'
-// export { default as CenterPage } from '../components/layout/CenterPage.jsx'
-// export { default as Feed } from '../components/layout/Feed.jsx'

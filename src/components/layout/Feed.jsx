@@ -3,17 +3,11 @@ import { Box } from "@mui/material";
 
 const Feed = () => {
   const arr = [];
-  for (let i = 0; i < 20; i++) arr.push(i);
+  for (let i = 0; i < 40; i++) arr.push(i); //placeholder list
   return (
-    <Box
-      sx={{
-        color: "white",
-        width: "300px",
-        marginLeft: "30px",
-      }}
-    >
-      <Box sx={{ position: "sticky", top: 0 }}>
-        <Box sx={{ overflowY: "auto" }}>
+    <Box className="layout-feed">
+      <Box className="sticky">
+        <Box className="overflow">
           MainFeed
           {arr.map(() => {
             return <p key={Math.random()}>Feed</p>;

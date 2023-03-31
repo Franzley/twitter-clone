@@ -1,16 +1,16 @@
 import React from "react";
 import { Button } from "@mui/material";
 
-const TweetButton = ({ buttonSizing: height, width }) => {
+const ChirpButton = ({ buttonSizing: height, width }) => {
   return (
     <Button
-      className="default-btn"
+      className="chirp-button"
       sx={{ height: height, width: width, borderRadius: 20 }}
       variant="contained"
     >
-      <span>Tweet</span>
+      <span>Chirp</span>
     </Button>
   );
 };
 
-export default TweetButton;
+export default ChirpButton;

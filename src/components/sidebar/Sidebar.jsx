@@ -1,11 +1,15 @@
-import React from "react";
-import { Stack, Button, Box } from "@mui/material";
-import { icons } from "../../utils/icons";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import "../../css/sidebar.css";
-import TweetButton from "../utilities/TweetButton";
+import { Context } from "../../store/appContext";
+
+import ChirpButton from "../utilities/ChirpButton";
+import { icons } from "../../utils/icons";
+import chirper from "../../images/chirper.ico";
+
+import { Stack, Button, Box } from "@mui/material";
 
 const Sidebar = () => {
+  const { store, actions } = useContext(Context);
   return (
     <Box flexGrow={1}>
       <Stack
@@ -21,7 +25,9 @@ const Sidebar = () => {
         }}
       >
         <Link style={{ textDecoration: "none" }} to="/home">
-          <Button variant="text">🕊️</Button>
+          <Button variant="text">
+            <img className="page-icon" src={chirper} width="35px" />
+          </Button>
         </Link>
 
         {icons.map((item, index) => {
@@ -42,8 +48,16 @@ const Sidebar = () => {
           );
         })}
 
-        <TweetButton buttonSizing={{ height: "50px" }} />
-
+        <ChirpButton buttonSizing={{ height: "50px" }} />
+        <button
+          className={`${!store.currentUser.length && "remove-from-view"}`}
+          onClick={() => {
+            actions.signOut();
+            window.location.reload(false);
+          }}
+        >
+          logout
+        </button>
         <Box
           sx={{
             marginTop: "50px",

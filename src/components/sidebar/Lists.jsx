@@ -1,6 +1,6 @@
 import React from "react";
-import { Stack } from "@mui/material";
 import { CenterPage, Feed } from "../index";
+import { Stack } from "@mui/material";
 
 const Lists = () => {
   const listsCenterPage = {

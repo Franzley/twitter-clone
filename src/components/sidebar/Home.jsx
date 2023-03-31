@@ -1,32 +1,29 @@
-import React, { useContext } from "react";
-import { Stack, Box, Typography } from "@mui/material";
-import { CenterPage, Feed } from "../index";
-import { Star } from "@mui/icons-material";
-import "../../css/home.css";
-import TweetButton from "../utilities/TweetButton.jsx";
+import React from "react";
 import { Link } from "react-router-dom";
-import { Context } from "../../store/appContext";
- 
-const Home = () => {
-  const { store, actions } = useContext(Context);
+import { CenterPage, Feed } from "../index";
+import ChirpButton from "../utilities/ChirpButton.jsx";
 
+import { Stack, Box, Typography } from "@mui/material";
+import { Star } from "@mui/icons-material";
+
+const Home = () => {
   const arr = [];
-  for (let i = 0; i < 50; i++) arr.push(i);
+  for (let i = 0; i < 50; i++) arr.push(i); //placeholder list
   const homeCenterPage = {
     pageHeader: (
       <Box sx={{ borderBottom: 1, padding: "12px", paddingTop: 0 }}>
         <Stack sx={{ justifyContent: "space-between", flexDirection: "row" }}>
-          <Typography>Latest Tweets</Typography>
+          <Typography>Latest Chirps</Typography>
           <Star />
         </Stack>
         <form>
-          <input className="inputHome" placeholder="What's on your mind?" />
-          <TweetButton buttonSizing={{ height: "35px", width: "75px" }} />
+          <input className="home-input-box" placeholder="What's on your mind?" />
+          <ChirpButton buttonSizing={{ height: "35px", width: "75px" }} />
         </form>
       </Box>
     ),
-    tweets: (
-      <ul className="tweets">
+    chirps: (
+      <ul className="chirps">
         {arr.map((item, index) => {
           return (
             <Link

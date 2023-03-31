@@ -11,4 +11,4 @@ export { default as Lists } from "./sidebar/Lists.jsx";
 export { default as Messages } from "./sidebar/Messages.jsx";
 export { default as Notifications } from "./sidebar/Notifications.jsx";
 export { default as Profile } from "./sidebar/Profile.jsx";
-export { default as Tweets } from "./layout/Tweets.jsx";
+export { default as Chirps } from "./layout/Chirps.jsx";

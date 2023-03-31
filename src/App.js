@@ -9,10 +9,10 @@ import {
   Messages,
   Notifications,
   Profile,
-  Tweets,
+  Chirps,
 } from "./components/index.js";
 import injectContext from "./store/appContext.js";
-import LoginPrompt from "./components/layout/LoginPrompt.jsx";
+import NoUserPrompt from "./components/layout/NoUserPrompt.jsx";
 
 import { Stack, Box } from "@mui/material";
 
@@ -21,7 +21,7 @@ import { Stack, Box } from "@mui/material";
 const App = () => {
   return (
     <BrowserRouter>
-      <LoginPrompt />
+      <NoUserPrompt />
       <Stack
         direction="row"
         sx={{
@@ -42,7 +42,7 @@ const App = () => {
             <Route path="/messages" element={<Messages />} />
             <Route path="/notifications" element={<Notifications />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/status/:id" element={<Tweets />} />
+            <Route path="/status/:id" element={<Chirps />} />
           </Routes>
         </Box>
       </Stack>

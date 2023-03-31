@@ -1,10 +1,10 @@
 import React from "react";
-import { Stack } from "@mui/material";
 import { CenterPage, Feed } from "../index";
+import { Stack } from "@mui/material";
 
 const Bookmarks = () => {
   const bookmarksCenterPage = {
-    pageHeader: <Stack>Save Tweets for later</Stack>,
+    pageHeader: <Stack>Save Chirps for later</Stack>,
   };
 
   return (

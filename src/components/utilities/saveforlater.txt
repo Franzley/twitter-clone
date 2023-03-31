@@ -1,0 +1,61 @@
+import React from "react";
+import { Button } from "@mui/material";
+
+
+
+      {/* login */}
+      {/* <SignInOrUpButtons
+        color="white"
+        backgroundcolor="rgb(94 136 165)"
+        text="Log in"
+        variant="outlined"
+        onClick={handleOpen}
+      /> */}
+      {/* sign up */}
+      {/* <SignInOrUpButtons
+        color="black"
+        backgroundcolor="white"
+        text="Sign up"
+        variant="contained"
+        onClick={handleOpen}
+      /> */}
+
+
+
+
+const SignInOrUpButtons = ({
+  color,
+  backgroundcolor,
+  text,
+  variant,
+  onClick,
+}) => {
+  return (
+    <div className="prompt-message-buttons">
+      <Button
+        sx={{
+          borderRadius: 20,
+          color: color,
+          background: backgroundcolor,
+        }}
+        className="chirp-button button-login"
+        onClick={onClick}
+        variant={variant}
+      >
+        <span>
+          <strong>{text}</strong>
+        </span>
+      </Button>
+    </div>
+  );
+};
+
+export default SignInOrUpButtons;
+
+
+
+
+/* .button-login {
+  height: 30px;
+  width: 110px;
+} */

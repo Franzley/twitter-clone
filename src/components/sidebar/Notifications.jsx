@@ -1,12 +1,12 @@
 import React from "react";
-import { Stack } from "@mui/material";
 import { CenterPage, Feed } from "../index";
+import { Stack } from "@mui/material";
 
 const Notifications = () => {
   const notificationsCenterPage = {
     pageHeader: (
       <Stack>
-        Nothing to see here — yet From likes to Retweets and a whole lot more,
+        Nothing to see here — yet From likes to Rechirps and a whole lot more,
         this is where all the action happens.
       </Stack>
     ),

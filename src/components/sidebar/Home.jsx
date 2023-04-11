@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../../store/appContext";
 import { Link } from "react-router-dom";
 import { CenterPage, Feed } from "../index";
 import ChirpButton from "../utilities/ChirpButton.jsx";
 
-import { Stack, Box, Typography } from "@mui/material";
+import { Stack, Box, Typography, Button } from "@mui/material";
 import { Star } from "@mui/icons-material";
 
 const Home = () => {
-  const arr = [];
-  for (let i = 0; i < 50; i++) arr.push(i); //placeholder list
+  const [inputBox, setInputBox] = useState();
+  const { store, actions } = useContext(Context);
+
   const homeCenterPage = {
     pageHeader: (
       <Box sx={{ borderBottom: 1, padding: "12px", paddingTop: 0 }}>
@@ -17,19 +19,26 @@ const Home = () => {
           <Star />
         </Stack>
         <form>
-          <input className="home-input-box" placeholder="What's on your mind?" />
-          <ChirpButton buttonSizing={{ height: "35px", width: "75px" }} />
+          <input
+            className="home-input-box"
+            placeholder="What's on your mind?"
+            onChange={(e) => setInputBox(e.target.value)}
+          />
+          <ChirpButton
+            onClick={() => actions.postChirp(inputBox)}
+            buttonSizing={{ height: "35px", width: "" }}
+          />
         </form>
       </Box>
     ),
     chirps: (
       <ul className="chirps">
-        {arr.map((item, index) => {
+        {store.chirpSection.map((item) => {
           return (
             <Link
-              key={index}
+              key={item.collectionID}
               style={{ textDecoration: "none" }}
-              to={`/status/${index}`}
+              to={`/status/${item.collectionID}`}
             >
               <li>
                 <Stack
@@ -50,9 +59,9 @@ const Home = () => {
                       flexDirection: "column",
                     }}
                   >
-                    <Box>{`User ${index}`}</Box>
+                    <Box>{store.currentUser}</Box>
                     <Stack>
-                      <Box>Content</Box>
+                      <Box>{item.chirp}</Box>
                       <Box>Icons</Box>
                     </Stack>
                   </Stack>

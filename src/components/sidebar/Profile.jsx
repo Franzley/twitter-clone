@@ -1,11 +1,28 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { CenterPage, Feed } from "../index";
-import { Stack } from "@mui/material";
+import { Stack, Box } from "@mui/material";
+import { Context } from "../../store/appContext";
 
 const Profile = () => {
+  const [inputBox, setInputBox] = useState();
+  const [file, setFile] = useState();
+
+  const { store, actions } = useContext(Context);
   const profileCenterPage = {
-    pageHeader: <Stack>Who to follow</Stack>,
+    pageHeader: <Stack>Update Account Details</Stack>,
+    accountDetails: (
+      <Stack>
+        <Box>Update User Name</Box>
+        <input
+          className="home-input-box"
+          placeholder="What name do you want to be known as?"
+          onChange={(e) => setInputBox(e.target.value)}
+        />
+        <button onClick={() => actions.updateUserName(inputBox)}>Change</button>
+      </Stack>
+    ),
   };
+  console.log(file);
 
   return (
     <Stack sx={{ bgcolor: "black", display: "flex", flexDirection: "row" }}>

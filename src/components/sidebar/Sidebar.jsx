@@ -59,9 +59,8 @@ const Sidebar = () => {
           logout
         </button>
         <Box
-         className={`${!store.currentUser.length && "remove-from-view"}`}
+          className={`${!store.currentUser.length && "remove-from-view"}`}
           sx={{
-            marginTop: "50px",
             height: "60px",
             color: "white",
             bgcolor: "black",

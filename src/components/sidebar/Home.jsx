@@ -52,7 +52,11 @@ const Home = () => {
                       marginRight: "12px",
                     }}
                   >
-                    Picture
+                    <img
+                      width="30px"
+                      height="30px"
+                      src="https://firebasestorage.googleapis.com/v0/b/twitter-clone-99e67.appspot.com/o/default-avatar-icon-of-social-media-user-vector.jpg?alt=media&token=96fb19c4-4895-471c-8ba1-9d57a8c0c813"
+                    />
                   </Box>
                   <Stack
                     sx={{

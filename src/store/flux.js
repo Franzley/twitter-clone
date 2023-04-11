@@ -1,13 +1,8 @@
 import { getFirestore } from "firebase/firestore";
 import {
-  doc,
-  getDoc,
-  setDoc,
   addDoc,
   collection,
   getDocs,
-  query,
-  updateDoc,
   serverTimestamp,
 } from "firebase/firestore";
 
@@ -17,16 +12,24 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  updateProfile,
 } from "firebase/auth";
 import { app } from "../firebase/FirebaseConfig";
 
+import { getStorage, ref } from "firebase/storage";
+
 const getState = ({ getStore, getActions, setStore }) => {
   const db = getFirestore(app);
+
+  // Initialize Cloud Storage and get a reference to the service
+  const storage = getStorage(app);
 
   const auth = getAuth(app);
   return {
     store: {
       currentUser: "",
+      currentUserEmail: "",
+      listOfUsersFeed: [],
       modalMessage: {
         sectionMessage: "Sign in to Chirper",
         accountStatusBtn: "signIn",
@@ -40,12 +43,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (user) {
             // User is signed in, see docs for a list of available properties
             // https://firebase.google.com/docs/reference/js/firebase.User
-            const email = user.email;
-            // console.log("Current User", email);
-            const currentUser = {
-              email: email,
-            };
-            setStore({ currentUser: currentUser.email });
+            console.log("current user details", user);
+
+            setStore({
+              currentUser: user.displayName ? user.displayName : user.email,
+            });
+            setStore({
+              currentUserEmail: user.email,
+            });
             actions.getChirp();
             // ...
           } else {
@@ -55,14 +60,35 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
       },
       createAccount: (email, password) => {
-        createUserWithEmailAndPassword(auth, email, password).then(
-          (userCredential) => {
+        createUserWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
             const user = userCredential.user;
             console.log(user);
+          })
+          .then(() => {
+            async function storeUser() {
+              const docRef = await addDoc(collection(db, "users"), {
+                email,
+              });
+              console.log("Document written with ID: ", docRef.id);
+            }
+
+            storeUser();
             window.location.reload(false);
-          }
-        );
+          });
         console.log("succeeded");
+      },
+      loadFeed: () => {
+        async function getFromFirestore() {
+          const chirpArray = [];
+          const querySnapshot = await getDocs(collection(db, "users"));
+          querySnapshot.forEach((doc) => {
+            chirpArray.push({ ...doc.data(), collectionID: doc.id });
+          });
+
+          setStore({ listOfUsersFeed: chirpArray });
+        }
+        getFromFirestore();
       },
       signIn: (email, password) => {
         signInWithEmailAndPassword(auth, email, password)
@@ -87,10 +113,9 @@ const getState = ({ getStore, getActions, setStore }) => {
         const store = getStore();
         const actions = getActions();
         console.log("submitted");
-        // console.log(chirp)
 
         async function postToFirestore() {
-          const docRef = await addDoc(collection(db, store.currentUser), {
+          const docRef = await addDoc(collection(db, store.currentUserEmail), {
             chirp,
             timestamp: serverTimestamp(),
           });
@@ -106,15 +131,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         async function getFromFirestore() {
           const chirpArray = [];
-          // const chirpArraySort = [];
           const querySnapshot = await getDocs(
-            collection(db, store.currentUser)
+            collection(db, store.currentUserEmail)
           );
           querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
             chirpArray.push({ ...doc.data(), collectionID: doc.id });
-            // console.log(doc.id, " => ", doc.data());
-            // console.log(doc.data().timestamp.toDate());
           });
 
           const sorted = chirpArray.sort((a, b) => {
@@ -130,6 +151,23 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
 
         getFromFirestore();
+      },
+      updateUserName: (name) => {
+        const store = getStore();
+
+        updateProfile(auth.currentUser, {
+          displayName: name,
+          photoURL: "https://example.com/jane-q-user/profile.jpg",
+        })
+          .then(() => {
+            // Profile updated!
+            // ...
+            window.location.reload(false);
+          })
+          .catch((error) => {
+            // An error occurred
+            // ...
+          });
       },
       noUserIsLogged: (accountStatus) => {
         const logInSection = {

@@ -6,6 +6,7 @@ const CenterPage = ({ content }) => {
     <Box className="layout-centerpage">
       {content.pageHeader}
       {content.chirps}
+      {content.accountDetails}
     </Box>
   );
 };

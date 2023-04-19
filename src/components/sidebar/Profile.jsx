@@ -5,7 +5,6 @@ import { Context } from "../../store/appContext";
 
 const Profile = () => {
   const [inputBox, setInputBox] = useState();
-  const [file, setFile] = useState();
 
   const { store, actions } = useContext(Context);
   const profileCenterPage = {
@@ -22,7 +21,6 @@ const Profile = () => {
       </Stack>
     ),
   };
-  console.log(file);
 
   return (
     <Stack sx={{ bgcolor: "black", display: "flex", flexDirection: "row" }}>

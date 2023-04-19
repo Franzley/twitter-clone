@@ -3,6 +3,8 @@ import {
   addDoc,
   collection,
   getDocs,
+  doc,
+  getDoc,
   serverTimestamp,
 } from "firebase/firestore";
 
@@ -28,6 +30,7 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       currentUser: "",
+      selectedChirp: "",
       currentUserEmail: "",
       listOfUsersFeed: [],
       modalMessage: {
@@ -38,6 +41,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     actions: {
       isUserLogged: () => {
+        // When page loads, detect if there is a user currently logged in or not
         onAuthStateChanged(auth, (user) => {
           const actions = getActions();
           if (user) {
@@ -110,6 +114,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
       },
       postChirp: (chirp) => {
+        // Submit the message and store details inside the firestore database
         const store = getStore();
         const actions = getActions();
         console.log("submitted");
@@ -122,35 +127,53 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("Document written with ID: ", docRef.id);
         }
 
+        // After posting the message, immediately retrieve the message from the database
         postToFirestore().then(() => {
           actions.getChirp();
         });
       },
-      getChirp: () => {
+      getChirp: (user, id) => {
         const store = getStore();
 
-        async function getFromFirestore() {
-          const chirpArray = [];
-          const querySnapshot = await getDocs(
-            collection(db, store.currentUserEmail)
-          );
-          querySnapshot.forEach((doc) => {
-            chirpArray.push({ ...doc.data(), collectionID: doc.id });
-          });
+        // Retrieve details only for the clicked message
+        // Otherwise, display all tweets associated with the user
+        if (id) {
+          async function getFromFirestore() {
+            const docRef = doc(db, user, id);
+            const docSnap = await getDoc(docRef);
 
-          const sorted = chirpArray.sort((a, b) => {
-            const dateA = new Date(`${a.timestamp.toDate()}`).valueOf();
-            const dateB = new Date(`${b.timestamp.toDate()}`).valueOf();
-            if (dateA > dateB) {
-              return 1; // return -1 here for DESC order
+            if (docSnap.exists()) {
+              setStore({ selectedChirp: docSnap.data() });
+            } else {
+              // docSnap.data() will be undefined in this case
+              console.log("No such document!");
             }
-            return -1; // return 1 here for DESC Order
-          });
+          }
+          getFromFirestore();
+        } else {
+          async function getFromFirestore() {
+            const chirpArray = [];
+            const querySnapshot = await getDocs(
+              collection(db, store.currentUserEmail)
+            );
+            querySnapshot.forEach((doc) => {
+              chirpArray.push({ ...doc.data(), collectionID: doc.id });
+            });
 
-          setStore({ chirpSection: sorted });
+            const sorted = chirpArray.sort((a, b) => {
+              const dateA = new Date(`${a.timestamp.toDate()}`).valueOf();
+              const dateB = new Date(`${b.timestamp.toDate()}`).valueOf();
+              if (dateA > dateB) {
+                return 1; // return -1 here for DESC order
+              }
+              return -1; // return 1 here for DESC Order
+            });
+
+            setStore({ chirpSection: sorted });
+          }
+
+          getFromFirestore();
         }
-
-        getFromFirestore();
       },
       updateUserName: (name) => {
         const store = getStore();
@@ -170,6 +193,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
       },
       noUserIsLogged: (accountStatus) => {
+        // Used to change the displayed information depending on the button the user clicked on
         const logInSection = {
           sectionMessage: "Sign in to Chirper",
           accountStatusBtn: "signIn",

@@ -42,7 +42,7 @@ const App = () => {
             <Route path="/messages" element={<Messages />} />
             <Route path="/notifications" element={<Notifications />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/status/:id" element={<Chirps />} />
+            <Route path="/status/:user/:id" element={<Chirps />} />
           </Routes>
         </Box>
       </Stack>

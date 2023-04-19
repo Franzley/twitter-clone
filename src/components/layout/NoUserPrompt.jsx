@@ -1,4 +1,3 @@
-// Display box if there is no account currently signed in
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../store/appContext";
@@ -7,6 +6,8 @@ import { Box, Typography } from "@mui/material";
 import Modal from "@mui/material/Modal";
 
 import PromptMessage from "../../utils/PromptMessage";
+
+// When no user is logged in, display a message box prompting them to sign in or create an account
 
 const NoUserPrompt = () => {
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ const NoUserPrompt = () => {
   }
 
   return (
+    // If user is logged in, assign class to remove the prompt
     <Box
       className={`no-account-box ${
         store.currentUser.length && "remove-from-view"

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { CenterPage, Feed } from "../index";
 import ChirpButton from "../utilities/ChirpButton.jsx";
 
-import { Stack, Box, Typography, Button } from "@mui/material";
+import { Stack, Box, Typography } from "@mui/material";
 import { Star } from "@mui/icons-material";
 
 const Home = () => {
@@ -34,11 +34,13 @@ const Home = () => {
     chirps: (
       <ul className="chirps">
         {store.chirpSection.map((item) => {
+          console.log(item);
           return (
+            // Each message is a clickable link that allows user to open up message
             <Link
               key={item.collectionID}
               style={{ textDecoration: "none" }}
-              to={`/status/${item.collectionID}`}
+              to={`/status/${item.email}/${item.collectionID}`}
             >
               <li>
                 <Stack

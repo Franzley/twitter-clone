@@ -1,15 +1,16 @@
-import React, { useState, useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../../store/appContext";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button, Box } from "@mui/material";
 
 const Feed = () => {
   const { store, actions } = useContext(Context);
+
+  // Calls action to get the users feed when the page reloads
   useEffect(() => {
-    console.log("sfjnfksndfkjsdnkfnkfnkjgfniuafnjlk");
     actions.loadFeed();
   }, []);
+
   return (
     <Box className="layout-feed">
       <Box className="sticky">
@@ -17,11 +18,7 @@ const Feed = () => {
           Follow Other Chirper Users
           {store.listOfUsersFeed.map((item) => {
             return (
-              <Link
-                key={item.collectionID}
-                style={{ textDecoration: "none" }}
-                // to={`/status/${item.email}`}
-              >
+              <Link key={item.collectionID} style={{ textDecoration: "none" }}>
                 <Button
                   sx={{ color: "white", height: "50px", width: "200px" }}
                   variant="text"

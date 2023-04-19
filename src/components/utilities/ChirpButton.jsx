@@ -1,6 +1,8 @@
 import React from "react";
 import { Button } from "@mui/material";
 
+// Reusable custom design for the message post button
+
 const ChirpButton = ({ buttonSizing: height, width, onClick }) => {
   return (
     <Button

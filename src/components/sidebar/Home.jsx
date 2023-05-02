@@ -34,7 +34,7 @@ const Home = () => {
     chirps: (
       <ul className="chirps">
         {store.chirpSection.map((item) => {
-          console.log(item);
+          //console.log(item);
           return (
             // Each message is a clickable link that allows user to open up message
             <Link
@@ -65,7 +65,7 @@ const Home = () => {
                       flexDirection: "column",
                     }}
                   >
-                    <Box>{store.currentUser}</Box>
+                    <Box>{store.currentUser || item.username}</Box>
                     <Stack>
                       <Box>{item.chirp}</Box>
                       <Box>Icons</Box>

@@ -62,6 +62,7 @@ const NoUserPrompt = () => {
             />
             <input
               placeholder="Password"
+              type="password"
               onChange={handleChange}
               name="password"
               value={login.password}

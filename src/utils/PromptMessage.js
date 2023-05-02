@@ -6,8 +6,8 @@ const PromptMessage = ({ handleOpen }) => {
 
   return (
     <div>
-      <div className="prompt-message">
-        <div>Don’t miss what’s happening</div>
+      <div className="">
+        <div>Don’t miss what’s happening </div>
         <div>People on Chirper are the first to know.</div>
       </div>
 

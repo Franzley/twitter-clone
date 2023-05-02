@@ -38,6 +38,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         accountStatusBtn: "signIn",
       },
       chirpSection: [],
+      chirpSectionDefault: [],
     },
     actions: {
       isUserLogged: () => {
@@ -47,7 +48,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (user) {
             // User is signed in, see docs for a list of available properties
             // https://firebase.google.com/docs/reference/js/firebase.User
-            console.log("current user details", user);
+            //console.log("current user details", user);
 
             setStore({
               currentUser: user.displayName ? user.displayName : user.email,
@@ -60,6 +61,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           } else {
             // User is signed out
             // ...
+            actions.getChirpDefault();
           }
         });
       },
@@ -67,20 +69,20 @@ const getState = ({ getStore, getActions, setStore }) => {
         createUserWithEmailAndPassword(auth, email, password)
           .then((userCredential) => {
             const user = userCredential.user;
-            console.log(user);
+            //console.log(user);
           })
           .then(() => {
             async function storeUser() {
               const docRef = await addDoc(collection(db, "users"), {
                 email,
               });
-              console.log("Document written with ID: ", docRef.id);
+              //console.log("Document written with ID: ", docRef.id);
             }
 
             storeUser();
             window.location.reload(false);
           });
-        console.log("succeeded");
+        //console.log("succeeded");
       },
       loadFeed: () => {
         async function getFromFirestore() {
@@ -104,7 +106,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             const errorCode = error.code;
             const errorMessage = error.message;
           });
-        console.log("succeeded");
+        //console.log("succeeded");
       },
       signOut: () => {
         signOut(auth)
@@ -117,14 +119,14 @@ const getState = ({ getStore, getActions, setStore }) => {
         // Submit the message and store details inside the firestore database
         const store = getStore();
         const actions = getActions();
-        console.log("submitted");
+        //console.log("submitted");
 
         async function postToFirestore() {
           const docRef = await addDoc(collection(db, store.currentUserEmail), {
             chirp,
             timestamp: serverTimestamp(),
           });
-          console.log("Document written with ID: ", docRef.id);
+          //console.log("Document written with ID: ", docRef.id);
         }
 
         // After posting the message, immediately retrieve the message from the database
@@ -134,7 +136,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       getChirp: (user, id) => {
         const store = getStore();
-
         // Retrieve details only for the clicked message
         // Otherwise, display all tweets associated with the user
         if (id) {
@@ -146,7 +147,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               setStore({ selectedChirp: docSnap.data() });
             } else {
               // docSnap.data() will be undefined in this case
-              console.log("No such document!");
+              //console.log("No such document!");
             }
           }
           getFromFirestore();
@@ -174,6 +175,40 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           getFromFirestore();
         }
+      },
+      getChirpDefault: () => {
+        // Load users chirps when signed out
+        async function getFromFirestore2() {
+          const chirpArray = [];
+          const querySnapshot2 = await getDocs(collection(db, "defaultlist"));
+          querySnapshot2.forEach((doc) => {
+            chirpArray.push({ ...doc.data(), collectionID: doc.id });
+          });
+
+          chirpArray.map((item) => {
+            async function getFromFirestore() {
+              const chirpArray2 = [];
+              const querySnapshot = await getDocs(collection(db, item.email));
+              querySnapshot.forEach((doc) => {
+                chirpArray2.push({ ...doc.data(), collectionID: doc.id });
+              });
+
+              const sorted = chirpArray2.sort((a, b) => {
+                const dateA = new Date(`${a.timestamp.toDate()}`).valueOf();
+                const dateB = new Date(`${b.timestamp.toDate()}`).valueOf();
+                if (dateA > dateB) {
+                  return 1; // return -1 here for DESC order
+                }
+                return -1; // return 1 here for DESC Order
+              });
+
+              setStore({ chirpSection: sorted });
+            }
+
+            getFromFirestore();
+          });
+        }
+        getFromFirestore2();
       },
       updateUserName: (name) => {
         const store = getStore();

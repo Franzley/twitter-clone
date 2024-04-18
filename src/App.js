@@ -20,32 +20,34 @@ import { Stack, Box } from "@mui/material";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <NoUserPrompt />
-      <Stack
-        direction="row"
-        sx={{
-          width: "100%",
-        }}
-      >
-        <Sidebar />
-        <Box
-          flexGrow={2}
-          sx={{ width: "60%", overflowY: "auto", maxHeight: "100vh" }}
+    <BrowserRouter >
+      <div className="wrapper">
+        <NoUserPrompt />
+        <Stack
+          direction="row"
+          sx={{
+            width: "100%",
+          }}
         >
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/bookmarks" element={<Bookmarks />} />
-            <Route path="/explore" element={<Explore />} />
-            <Route path="/lists" element={<Lists />} />
-            <Route path="/messages" element={<Messages />} />
-            <Route path="/notifications" element={<Notifications />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/status/:user/:id" element={<Chirps />} />
-          </Routes>
-        </Box>
-      </Stack>
+          <Sidebar />
+          <Box
+            flexGrow={2}
+            sx={{ width: "60%", overflowY: "auto", maxHeight: "100vh" }}
+          >
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/bookmarks" element={<Bookmarks />} />
+              <Route path="/explore" element={<Explore />} />
+              <Route path="/lists" element={<Lists />} />
+              <Route path="/messages" element={<Messages />} />
+              <Route path="/notifications" element={<Notifications />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/status/:user/:id" element={<Chirps />} />
+            </Routes>
+          </Box>
+        </Stack>
+      </div>
     </BrowserRouter>
   );
 };

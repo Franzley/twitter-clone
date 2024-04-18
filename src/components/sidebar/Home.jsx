@@ -15,8 +15,7 @@ const Home = () => {
     pageHeader: (
       <Box sx={{ borderBottom: 1, padding: "12px", paddingTop: 0 }}>
         <Stack sx={{ justifyContent: "space-between", flexDirection: "row" }}>
-          <Typography>Latest Chirps</Typography>
-          <Star />
+          <Typography fontSize={'1.5rem'} className="chirper-mainpage-title">Latest Chirps</Typography>
         </Stack>
         <form>
           <input
@@ -54,7 +53,7 @@ const Home = () => {
                       marginRight: "12px",
                     }}
                   >
-                    <img
+                    <img className="chirp-profile"
                       width="30px"
                       height="30px"
                       src="https://firebasestorage.googleapis.com/v0/b/twitter-clone-99e67.appspot.com/o/default-avatar-icon-of-social-media-user-vector.jpg?alt=media&token=96fb19c4-4895-471c-8ba1-9d57a8c0c813"
@@ -65,10 +64,10 @@ const Home = () => {
                       flexDirection: "column",
                     }}
                   >
-                    <Box>{store.currentUser || item.username}</Box>
+                    <Box className="chirp-username">{store.currentUser || item.username}</Box>
                     <Stack>
-                      <Box>{item.chirp}</Box>
-                      <Box>Icons</Box>
+                      <Box className="chirp-content">{item.chirp}</Box>
+                      {/* <Box>Icons</Box> */}
                     </Stack>
                   </Stack>
                 </Stack>

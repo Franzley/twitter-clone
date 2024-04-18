@@ -41,7 +41,7 @@ const Sidebar = () => {
                 sx={{ color: "white", height: "50px", width: "200px" }}
                 variant="text"
               >
-                <span>{item.icon}</span>
+                <span className="sidebar-icon">{item.icon}</span>
                 <span>{item.name}</span>
               </Button>
             </Link>

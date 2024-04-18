@@ -5,29 +5,32 @@ const PromptMessage = ({ handleOpen }) => {
   const { store, actions } = useContext(Context);
 
   return (
-    <div>
-      <div className="">
+    <div className="no-account">
+      <div className="no-account-message">
         <div>Don’t miss what’s happening </div>
         <div>People on Chirper are the first to know.</div>
       </div>
 
-      <button
-        onClick={() => {
-          actions.noUserIsLogged("login");
-          handleOpen();
-        }}
-      >
-        login
-      </button>
+      <div className="btn-auth-wrapper">
+        <button className="btn-auth"
+          onClick={() => {
+            actions.noUserIsLogged("login");
+            handleOpen();
+          }}
+        >
+          <span>login</span><i></i>
 
-      <button
-        onClick={() => {
-          actions.noUserIsLogged("signup");
-          handleOpen();
-        }}
-      >
-        signup
-      </button>
+        </button>
+
+        <button className="btn-auth"
+          onClick={() => {
+            actions.noUserIsLogged("signup");
+            handleOpen();
+          }}
+        >
+          <span>signup</span><i></i>
+        </button>
+      </div>
     </div>
   );
 };
